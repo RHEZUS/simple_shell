@@ -14,6 +14,7 @@
 int countWords(const char *input);
 void splitString(const char *input, char ***words, int *wordCount);
 
+char *_strtok(char *str, const char *delim);
 
 
 
