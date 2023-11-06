@@ -5,46 +5,35 @@
 
 int main(void)
 {
-
-	char *envp = {NULL};
+	char *line = NULL;
+	char *arg = NULL;
+	char *argv[32];
 	size_t len = 0;
+	int i = 1;
 	ssize_t read = 0;
-	int status = 0;
 	char *command = NULL;
-	char **words = NULL;
-	int wordCount = 0;
 
 	while (1)
 	{
 		printf("simple_shell$ ");
-
-		read = getline(&command, &len, stdin);
-		if (read == -1)
-		{
-			if (feof(stdin) == 0)
-				break;
-			else
-			{
-				perror("Error reading input");
-				exit (EXIT_FAILURE);
-			}
-		}
+		read = getline(&line, &len, stdin);
 		
-		if (read > 0 && command[read - 1] == '\n')
-			command[read - 1] = '\0';
-
-		if (fork() == 0)
-		{	
-			(char *const)words;
-			execve(command, splitString(command, &words, &wordCount), NULL);
-			perror("simple_shell ");
-			exit(EXIT_FAILURE);
-		}
-		else
+		if (read == -1)
+			break;
+		if (read > 0 && line[read - 1] == '\n')
 		{
-			wait(&status);
+			line[read - 1] = '\0';	
+			command = strtok(line, " ");
+			argv[0] = command;
+			
+			while((arg = strtok(NULL, " ")) != NULL)
+				argv[i++] = arg;
+			
+			argv[i] = NULL;
 		}
+		run_command(command, argv);
 	}
 
+	free(line);
 	return (0);
 }
