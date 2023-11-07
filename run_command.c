@@ -18,6 +18,25 @@ int string_to_int(char *str)
 	return (n);
 }
 
+void updatePWD (const char *newDir)
+{
+	setenv("PWD", newDir, 1);
+}
+
+void change_dir(char **argv)
+{
+	const char *dir = argv[1];
+	if (dir == NULL || strcmp(dir, "~") == 0)
+		dir = getenv ("HOME");
+	else if (strcmp(dir, "-") == 0)
+		dir = getenv("OLDPWD");
+	
+	if (chdir(dir) == -1)
+		perror("chdir");
+	else
+		updatePWD(dir);
+}
+
 /***/
 
 void run_command(char *command, char **argv)
@@ -36,6 +55,8 @@ void run_command(char *command, char **argv)
 		set_env(argv);
 	else if (strcmp(command, "unsetenv") == 0)
 		unset_env(argv);
+	else if (strcmp(command, "cd") == 0)
+		change_dir(argv);
 	else
 	{
 		command = find_path(command);
@@ -47,7 +68,7 @@ void run_command(char *command, char **argv)
 			if (fork() == 0)
 			{
 				execve(command, argv, NULL);
-				perror("simple_shell ");
+				perror("");
 				exit(EXIT_FAILURE);
 			}
 			else

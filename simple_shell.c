@@ -15,7 +15,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("simple_shell$ ");
+		printf("$");
 		read = getline(&line, &len, stdin);
 		
 		if (read == -1)

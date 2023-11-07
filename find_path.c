@@ -13,7 +13,7 @@ char *find_path(char *filename)
 
 	if (access(filename, F_OK | X_OK) == 0)
 		return (filename);
-	if (path == NULL || filename == NULL)
+	if (path == NULL || filename == NULL || strcmp(filename, "") == 1)
 		return (NULL);
 	while (dir != NULL)
 	{

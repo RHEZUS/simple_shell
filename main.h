@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <ctype.h>
+#include <limits.h>
 
 
 #define MAX_COMMAND_LENGTH 100
@@ -21,6 +22,7 @@ char *find_path(char *filename);
 void run_command(char *command, char **argv);
 void set_env(char **argv);
 void unset_env (char **argv);
+
 /*void _exit(char *code);*/
 
 
