@@ -1,6 +1,9 @@
 #include "main.h"
 
-/***/
+/**
+ * main - entry point
+ * Return: always 0
+ */
 
 
 int main(void)
@@ -17,18 +20,18 @@ int main(void)
 	{
 		write(0, "$ ", 2);
 		read = getline(&line, &len, stdin);
-		
+
 		if (read == -1)
 			break;
 		if (read > 0 && line[read - 1] == '\n')
 		{
-			line[read - 1] = '\0';	
+			line[read - 1] = '\0';
 			command = strtok(line, " ");
 			argv[0] = command;
-			
-			while((arg = strtok(NULL, " ")) != NULL)
+			i = 1;
+			while ((arg = strtok(NULL, " ")) != NULL)
 				argv[i++] = arg;
-			
+
 			argv[i] = NULL;
 		}
 		run_command(command, argv);

@@ -1,33 +1,54 @@
 #include "main.h"
 
-/***/
+/**
+ * find_path - finds the fullpath of a file
+ * @filename: the name of the file
+ * Return: the full path to the file
+ */
 
 
 char *find_path(char *filename)
 {
-	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
+	char *path = _getenv("PATH");
+	char *path_copy = _strdup(path);
 	char *dir = strtok(path_copy, ":");
-	char *full_path = NULL;
-	int len = 0;
+	char fullpath[1024] = "";
+	unsigned int len = 0;
 
-	if (access(filename, F_OK | X_OK) == 0)
-		return (filename);
-	if (path == NULL || filename == NULL || _strcmp(filename, "") == 0)
-		return (NULL);
-	while (dir != NULL)
+	if (filename[0] == '/' || filename[0] == '.' || filename[0] == '~')
 	{
-		len = sizeof(dir) + sizeof(filename) + 2;
-		full_path = realloc(full_path, len);
-		snprintf(full_path, len, "%s/%s", dir, filename);
-
-		if (access(full_path, F_OK | X_OK) == 0)
+		if (access(filename, F_OK) == 0)
 		{
 			free(path_copy);
-			return(full_path);
+			return (_strdup(filename));
 		}
-		dir = strtok(NULL, ":");
 	}
-	free(path_copy);
+	else if (path == NULL || filename == NULL)
+	{
+		free(path_copy);
+		return (NULL);
+	}
+	else
+	{
+		while (dir != NULL)
+		{
+			len = _strlen(dir) + _strlen(filename) + 1;
+			if (len > sizeof(fullpath))
+			{
+				free(path_copy);
+				return (NULL);
+			}
+			_strcpy(fullpath, dir);
+			_strcat(fullpath, "/");
+			_strcat(fullpath, filename);
+			if (access(fullpath, F_OK) == 0)
+			{
+				free(path_copy);
+				return (_strdup(fullpath));
+			}
+			dir = strtok(NULL, ":");
+		}
+		free(path_copy);
+	}
 	return (NULL);
 }

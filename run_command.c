@@ -1,53 +1,22 @@
 #include "main.h"
 
-int string_to_int(char *str)
-{
-	int i = 0, n = 0;
-	
-	if (str == NULL)
-		return (0);
-		
-	while (str[i] != '\0')
-	{
-		if (str[i] > '0' && str[i] <= '9')
-			n = n * 10 + (str[i] - '0');
-		else
-			return (0);
-		i++;
-	}
-	return (n);
-}
 
-void updatePWD (const char *newDir)
-{
-	setenv("PWD", newDir, 1);
-}
-
-void change_dir(char **argv)
-{
-	const char *dir = argv[1];
-	if (dir == NULL || strcmp(dir, "~") == 0)
-		dir = getenv ("HOME");
-	else if (strcmp(dir, "-") == 0)
-		dir = getenv("OLDPWD");
-	
-	if (chdir(dir) == -1)
-		perror("chdir");
-	else
-		updatePWD(dir);
-}
-
-/***/
+/**
+ * run_command - runs a command
+ * @command: the path to the file
+ * @argv: the list of arguments
+ */
 
 void run_command(char *command, char **argv)
 {
 	int status = 0, n = 0;
+
 	if (_strcmp(command, "clear") == 0)
 		system("clear");
 	else if (_strcmp(command, "exit") == 0)
 	{
-		n = string_to_int(argv[1]);
-		exit(n);
+		n = _atoi(argv[1]);
+		_exit(n);
 	}
 	else if (_strcmp(command, "env") == 0)
 		print_env();
@@ -60,15 +29,14 @@ void run_command(char *command, char **argv)
 	else
 	{
 		command = find_path(command);
-		
 		if (command == NULL)
-			perror("Command not found");
+			perror("./shell");
 		else
 		{
 			if (fork() == 0)
 			{
 				execve(command, argv, NULL);
-				perror("");
+				perror("./shell");
 				exit(EXIT_FAILURE);
 			}
 			else
