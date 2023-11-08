@@ -13,7 +13,7 @@ char *find_path(char *filename)
 
 	if (access(filename, F_OK | X_OK) == 0)
 		return (filename);
-	if (path == NULL || filename == NULL || strcmp(filename, "") == 1)
+	if (path == NULL || filename == NULL || _strcmp(filename, "") == 0)
 		return (NULL);
 	while (dir != NULL)
 	{
@@ -24,7 +24,7 @@ char *find_path(char *filename)
 		if (access(full_path, F_OK | X_OK) == 0)
 		{
 			free(path_copy);
-			return(strdup(full_path));
+			return(full_path);
 		}
 		dir = strtok(NULL, ":");
 	}

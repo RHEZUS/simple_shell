@@ -15,7 +15,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("$");
+		write(0, "$ ", 2);
 		read = getline(&line, &len, stdin);
 		
 		if (read == -1)

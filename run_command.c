@@ -42,20 +42,20 @@ void change_dir(char **argv)
 void run_command(char *command, char **argv)
 {
 	int status = 0, n = 0;
-	if (strcmp(command, "clear") == 0)
+	if (_strcmp(command, "clear") == 0)
 		system("clear");
-	else if (strcmp(command, "exit") == 0)
+	else if (_strcmp(command, "exit") == 0)
 	{
 		n = string_to_int(argv[1]);
 		exit(n);
 	}
-	else if (strcmp(command, "env") == 0)
+	else if (_strcmp(command, "env") == 0)
 		print_env();
-	else if (strcmp(command, "setenv") == 0)
+	else if (_strcmp(command, "setenv") == 0)
 		set_env(argv);
-	else if (strcmp(command, "unsetenv") == 0)
+	else if (_strcmp(command, "unsetenv") == 0)
 		unset_env(argv);
-	else if (strcmp(command, "cd") == 0)
+	else if (_strcmp(command, "cd") == 0)
 		change_dir(argv);
 	else
 	{
