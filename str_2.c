@@ -43,3 +43,15 @@ char *_strdup(char *str)
 
 	return (str_copy);
 }
+
+int _strchr(char *str, char c)
+{
+	while (*str != '\0')
+	{
+		if (*str == c)
+			return (0);
+		str++;
+	}
+	
+	return (-1);
+}

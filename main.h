@@ -10,11 +10,17 @@
 
 
 #define MAX_COMMAND_LENGTH 100
+#define MAX_ALIASES 100
+
 extern char **environ;
+
+
 
 void run_command(char **argv);
 char *find_path(char *filename);
-
+void execute_comand(char **argv);
+int run_built_in(char **argv);
+int run_aliases(char **argv);
 /********** Utilities commands ***********/
 
 int _strcmp(char *str1, char *str2);
@@ -25,16 +31,17 @@ char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 char *_getenv(char *var_name);
-
+int _strchr(char *str, char c);
 /********** Builtin commands *************/
 
 void set_env(char **argv);
 void unset_env (char **argv);
 void print_env();
 void change_dir(char **argv);
-
-
-
-
+void handle_alias(char **argv);
+void create_update_alias(char *alias);
+void print_all_aliases(void);
+void print_alias(char *name);
+void print_all_aliases(void);
 
 #endif
