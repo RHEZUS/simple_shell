@@ -12,7 +12,7 @@
 #define MAX_COMMAND_LENGTH 100
 extern char **environ;
 
-void run_command(char *command, char **argv);
+void run_command(char **argv);
 char *find_path(char *filename);
 
 /********** Utilities commands ***********/

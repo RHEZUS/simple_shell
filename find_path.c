@@ -50,5 +50,6 @@ char *find_path(char *filename)
 		}
 		free(path_copy);
 	}
+	free(path_copy);
 	return (NULL);
 }
