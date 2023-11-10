@@ -11,7 +11,7 @@ char *find_path(char *filename)
 {
 	char *path = _getenv("PATH");
 	char *path_copy = _strdup(path);
-	char *dir = strtok(path_copy, ":");
+	char *dir = _strtok(path_copy, ":");
 	char fullpath[1024] = "";
 	unsigned int len = 0;
 
@@ -46,10 +46,9 @@ char *find_path(char *filename)
 				free(path_copy);
 				return (_strdup(fullpath));
 			}
-			dir = strtok(NULL, ":");
+			dir = _strtok(NULL, ":");
 		}
 		free(path_copy);
 	}
-	free(path_copy);
 	return (NULL);
 }

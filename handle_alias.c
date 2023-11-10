@@ -24,7 +24,7 @@ void handle_alias(char **argv)
 	{
 		for (i = 1; argv[i] != NULL; i++)
 		{
-			if (_strchr(argv[i], '=') != 0)
+			if (_strchr(argv[i], '=') == NULL)
 				print_alias(argv[i]);
 			else
 			{
@@ -38,8 +38,8 @@ void handle_alias(char **argv)
 
 void create_update_alias(char *alias)
 {
-	char *name = strtok(alias, "=");
-	char *value = strtok(NULL, "=");
+	char *name = _strtok(alias, "=");
+	char *value = _strtok(NULL, "=");
 	int exists = 0, i, j;
 	/*printf("%s\n", name);*/
 	
@@ -68,8 +68,8 @@ void create_update_alias(char *alias)
 	if (!exists)
 	{
 		
-		aliases[alias_count].name = strdup(name);
-		aliases[alias_count].value = strdup(value);
+		aliases[alias_count].name = _strdup(name);
+		aliases[alias_count].value = _strdup(value);
 		/*printf("newly created: %s='%s'\n", aliases[alias_count].name, aliases[alias_count].value);*/
 		alias_count++;
 		
@@ -134,11 +134,11 @@ int run_aliases(char **argv)
 		if (_strcmp(aliases[i].name, argv[0]) == 0)
 		{
 			alias_found = 1;
-			tocken = strtok(aliases[i].value, " ");
+			tocken = _strtok(aliases[i].value, " ");
 			while (tocken != NULL)
 			{
 				args[j++] = tocken;
-				tocken = strtok(NULL, " ");
+				tocken = _strtok(NULL, " ");
 			}
 			
 			while (argv[k++] != NULL)

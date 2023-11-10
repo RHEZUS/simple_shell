@@ -4,6 +4,8 @@
  * main - entry point
  * Return: always 0
  */
+ 
+
 
 
 int main(void)
@@ -18,33 +20,37 @@ int main(void)
 	while (1)
 	{
 		write(0, "$ ", 2);
-		read = getline(&line, &len, stdin);
+		read = _getline(&line, &len, STDIN_FILENO);
 
 		if (read == -1)
 			break;
 		if (read > 0 && line[read - 1] == '\n')
-		{
 			line[read - 1] = '\0';
-		}
 		
 		i = 0;
-		arg = strtok(line, " ");
-		
-		/*printf("first token %s\n", arg);*/
+		arg = _strtok(line, " \t\n");
 		while (arg != NULL)
 		{
 			argv[i++] = arg;
-			arg = strtok(NULL, " ");
-			/*printf("%dth token %s\n", i, arg);*/
+			arg = _strtok(NULL, " \t\n");
 		}
-		
 
 		argv[i] = NULL;
-		/*
-		for (i = 0; argv[i] != NULL; i++)
-			printf("%s\n", argv[i]);*/
+		i = 1;
+		while (argv[i] != NULL)
+		{
+			
+			argv[i] = handle_arguments(argv[i]);
+			if (argv[i] == NULL && argv[i + 1] != NULL)
+			{
+				argv[i] = argv[i + 1];
+				argv[i + 1] = NULL;
+			}
+			i++;
+		}
+		
 		run_command(argv);
 	}
-
+	free(line);
 	return (0);
 }

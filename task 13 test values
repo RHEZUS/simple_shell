@@ -1,0 +1,42 @@
+unit tests
+
+1 - - - - - - -
+alias ls_alias=/bin/ls
+alias
+
+2  - - - - - - -
+
+alias ls_alias=/bin/ls
+ls_alias
+
+3 - - - - - - -
+
+alias ls_alias=/bin/ls
+alias ls_alias_alias=ls_alias
+ls_alias_alias
+
+
+4 - - - - - - -
+
+alias TEST_OVERWRITE=b
+alias TEST_OVERWRITE=hbtn
+alias
+
+5 - - - - - - -
+alias alias1=/bin/ls alias2=/bin/echo alias3=/bin/pwd
+alias
+
+6 - - - - - - -
+alias alias1=/bin/ls alias2=/bin/echo alias1 alias3=/bin/pwd alias1=/bin/echo alias1 alias2
+
+7 - - - - - - -
+alias alias1=/bin/ls alias1=/bin/echo alias1=/bin/pwd
+alias
+
+
+8 - - - - - - -
+
+alias alias1=/bin/ls
+alias alias2=/bin/echo
+alias alias3=/bin/pwd
+alias alias1 alias3

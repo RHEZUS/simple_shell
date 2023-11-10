@@ -103,6 +103,7 @@ int _strncmp(char *str1, char *str2, size_t n)
  * @src: the string to add
  * Return: the concatenated string
  */
+ 
 char *_strcat(char *dest, const char *src)
 {
 	int i = 0, len = 0;
