@@ -7,6 +7,8 @@ char *handle_arguments(char *arg)
 	int status;
 	pid_t pid = getpid();
         
+        if (arg == NULL)
+            return (NULL);
 	if (_strchr(arg, '"') != NULL)
 	{
 		/*printf("thing found\n");*/
