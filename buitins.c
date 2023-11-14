@@ -2,6 +2,7 @@
 
 /**
  * change_dir - changes the current directory
+ *
  * @argv: a list of argument
  */
 
@@ -20,9 +21,8 @@ void change_dir(char **argv)
 		setenv("PWD", dir, 1);
 }
 
-
 /**
- * print_env - prints the current environmen
+ * print_env - prints the current environment
  */
 
 void print_env(void)
@@ -37,9 +37,9 @@ void print_env(void)
 }
 
 /**
- * _getenv - returns a precific environment variable
+ * _getenv - returns a specific environment variable
  * @var_name: the name of the variable
- * Return: a pointer to the environement variable
+ * Return: a pointer to the environment variable
  */
 
 char *_getenv(char *var_name)
@@ -52,19 +52,17 @@ char *_getenv(char *var_name)
 	for (env = environ; *env != NULL; env++)
 	{
 		if (_strncmp(var_name, *env, var_len) == 0 &&
-		(*env)[var_len] == '=')
+			(*env)[var_len] == '=')
 			return (&(*env)[var_len + 1]);
 	}
 
 	return (NULL);
 }
 
-
 /**
- * set_env - creates or updates an environement variable
+ * set_env - creates or updates an environment variable
  * @argv: a list of arguments
  */
-
 
 void set_env(char **argv)
 {
@@ -75,12 +73,10 @@ void set_env(char **argv)
 		perror("Invalid command");
 }
 
-
 /**
- * unset_env - unsets an environnement variable
+ * unset_env - unset an environment variable
  * * @argv: a list of arguments
  */
-
 
 void unset_env(char **argv)
 {

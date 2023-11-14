@@ -14,11 +14,22 @@
 
 extern char **environ;
 
+/**
+ * struct Alias - alias type
+ * @name: alias name
+ * @value: alias value
+ */
+struct Alias
+{
+	char *name;
+	char *value;
+};
 
+extern int alias_count = 0;
 
 void run_command(char **argv);
 char *find_path(char *filename);
-void execute_comand(char **argv);
+void execute_command(char **argv);
 int run_built_in(char **argv);
 int run_aliases(char **argv);
 char *_strtok(char *str, const char *delim);
@@ -43,14 +54,14 @@ char *handle_arguments(char *arg);
 /********** Builtin commands *************/
 
 void set_env(char **argv);
-void unset_env (char **argv);
-void print_env();
+void unset_env(char **argv);
+void print_env(void);
 void change_dir(char **argv);
 void handle_alias(char **argv);
 void create_update_alias(char *alias);
 void print_all_aliases(void);
 void print_alias(char *name);
 void print_all_aliases(void);
-char *delete_char(char* str, char ch);
-char* int_to_string(unsigned long int num);
+char *delete_char(char *str, char ch);
+char *int_to_string(unsigned long int num);
 #endif

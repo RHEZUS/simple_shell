@@ -24,7 +24,6 @@ int _atoi(char *str)
 	return (n);
 }
 
-
 /**
  * _strlen - returns the length of a string.
  * @str: pointer to string.
@@ -44,8 +43,6 @@ int _strlen(char *str)
 	return (--len);
 }
 
-
-
 /**
  * _strcmp - compares two strings
  * @str1: the first string
@@ -57,10 +54,8 @@ int _strcmp(char *str1, char *str2)
 {
 	int len;
 
-
 	for (len = 0; str1[len] == str2[len] && str1[len]; len++)
 		;
-
 
 	if (str1[len] > str2[len])
 		return (1);
@@ -96,14 +91,13 @@ int _strncmp(char *str1, char *str2, size_t n)
 	return (*str1 - *str2);
 }
 
-
 /**
  * _strcat - concatenates two strings
  * @dest: the frist string to which the second will be added
  * @src: the string to add
  * Return: the concatenated string
  */
- 
+
 char *_strcat(char *dest, const char *src)
 {
 	int i = 0, len = 0;
@@ -118,5 +112,3 @@ char *_strcat(char *dest, const char *src)
 
 	return (dest);
 }
-
-

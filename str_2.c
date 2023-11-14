@@ -20,7 +20,6 @@ char *_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-
 /**
  * _strdup - duplicates a string
  * @str: the string to duplicate
@@ -44,33 +43,43 @@ char *_strdup(char *str)
 	return (str_copy);
 }
 
-
-/***/
-
+/**
+ * _strchr - search a character in in a string
+ * @str:  the string
+ * @c: the char to find
+ * Return: the first occurrence of the char in the string
+ */
 char *_strchr(const char *str, char c)
 {
 	while (*str != '\0')
 	{
 		if (*str == c)
 		{
-			return ((char*)str);
+			return ((char *)str);
 		}
 		str++;
 	}
-    
+
 	if (c == '\0')
 	{
 		/* Return pointer to null terminator for '\0' */
-		return ((char*)str);
+		return ((char *)str);
 	}
-    
+
 	return (NULL);
 }
 
-char *delete_char(char* str, char ch)
+/**
+ * delete_char - delete a char in a string
+ * @str: the string
+ * @ch: the char to delete
+ * Return: the new string
+ */
+char *delete_char(char *str, char ch)
 {
 	int length = _strlen(str);
 	int i, j;
+
 	for (i = 0, j = 0; i < length; i++)
 	{
 		if (str[i] != ch)
@@ -82,31 +91,36 @@ char *delete_char(char* str, char ch)
 	return (str);
 }
 
-char* int_to_string(unsigned long int num)
+/**
+ * int_to_string - cast an integer to string
+ * @num: the number to cast
+ * Return: a string
+ */
+char *int_to_string(unsigned long int num)
 {
-    int digits = 1;
-    unsigned long int temp = num;
-    char *str;
-    
-    while (temp /= 10)
-    {
-        digits++;
-    }
+	int digits = 1;
+	unsigned long int temp = num;
+	char *str;
 
-    str = (char*)malloc((digits + 1) * sizeof(char)); 
-    
-    if (str == NULL)
-    {
-        return NULL; 
-    }
+	while (temp /= 10)
+	{
+		digits++;
+	}
 
-    str[digits] = '\0'; 
+	str = (char *)malloc((digits + 1) * sizeof(char));
 
-    while (num != 0)
-    {
-        str[--digits] = (num % 10) + '0';
-        num /= 10;
-    }
+	if (str == NULL)
+	{
+		return (NULL);
+	}
 
-    return str;
+	str[digits] = '\0';
+
+	while (num != 0)
+	{
+		str[--digits] = (num % 10) + '0';
+		num /= 10;
+	}
+
+	return (str);
 }

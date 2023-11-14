@@ -1,21 +1,25 @@
 #include "main.h"
 
-
+/**
+ * handle_arguments - handle command arguments
+ * @arg: arguments
+ * Return: a string
+ */
 char *handle_arguments(char *arg)
 {
 	char *str = arg;
 	int status;
 	pid_t pid = getpid();
-        
-        if (arg == NULL)
-            return (NULL);
+
+	if (arg == NULL)
+		return (NULL);
 	if (_strchr(arg, '"') != NULL)
 	{
 		/*printf("thing found\n");*/
 		str = delete_char(arg, '"');
 	}
-	
-	if (_strcmp(arg, "$?")  == 0)
+
+	if (_strcmp(arg, "$?") == 0)
 	{
 		return (WIFEXITED(status) ? "1" : "0");
 	}
@@ -28,7 +32,7 @@ char *handle_arguments(char *arg)
 		/*printf("a $ thing found\n");*/
 		arg = delete_char(arg, '$');
 		str = _getenv(arg);
-		
+
 		/*printf("here it is: %s \n", str);*/
 	}
 	else if (strchr(arg, '$'))
@@ -39,7 +43,3 @@ char *handle_arguments(char *arg)
 	/*printf("nothing found\n");*/
 	return (str);
 }
-
-
-
-

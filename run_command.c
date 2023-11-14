@@ -1,31 +1,26 @@
 #include "main.h"
 
-
 /**
  * run_command - runs a command
- * @command: the path to the file
  * @argv: the list of arguments
  */
-
 void run_command(char **argv)
 {
-        if (argv[0] == NULL)
+	if (argv[0] == NULL || run_built_in(argv) == 0 || run_aliases(argv) == 0)
 		return;
-	if (run_built_in(argv) == 0)
-		return;
-	else if (run_aliases(argv) == 0)
-		return;
-	else
-	{
-		execute_comand(argv);
-	}
+	execute_command(argv);
 }
 
-void execute_comand(char **argv)
+/**
+ * execute_command - execute a command
+ * @argv: command list with arguments
+ */
+void execute_command(char **argv)
 {
 	int status = 0;
+
 	argv[0] = find_path(argv[0]);
-	
+
 	if (argv[0] == NULL)
 	{
 		free(argv[0]);
@@ -41,10 +36,17 @@ void execute_comand(char **argv)
 			exit(EXIT_FAILURE);
 		}
 		else
+		{
 			wait(&status);
+		}
 	}
 }
 
+/**
+ * run_built_in - run built in command
+ * @argv: command
+ * Return: 0 if command is found and -1 if not
+ */
 int run_built_in(char **argv)
 {
 	int n = 0;
@@ -82,5 +84,3 @@ int run_built_in(char **argv)
 	else
 		return (-1);
 }
-
-
