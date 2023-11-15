@@ -25,8 +25,6 @@ struct Alias
 	char *value;
 };
 
-extern int alias_count = 0;
-
 void run_command(char **argv);
 char *find_path(char *filename);
 void execute_command(char **argv);

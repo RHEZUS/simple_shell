@@ -8,6 +8,9 @@ struct Alias aliases[MAX_ALIASES];
  * handle_alias - this function is used to handle alias
  * @argv: list of alias
  */
+ 
+int alias_count = 0;
+ 
 void handle_alias(char **argv)
 {
 	int i;
