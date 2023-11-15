@@ -57,7 +57,7 @@ void execute_single_command(char *command)
 	char *arg = NULL;
 
 	int i = 0;
-
+	
 	arg = _strtok(command, " \t\n");
 	while (arg != NULL)
 	{

@@ -76,7 +76,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 		else if (result == 0)
 		{
 			if (bytes_read == 0)
-				return (-1); /* Return -1 if no characters read */
+				return (-1);
 			break;
 		}
 		if (bytes_read >= *n - 1)
@@ -94,7 +94,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 		if (next_char == '\n')
 			break;
 	}
-	(*lineptr)[position] = '\0'; /* Null-terminate the string */
+	(*lineptr)[position] = '\0';
 	return (bytes_read);
 }
 
