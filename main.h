@@ -33,7 +33,8 @@ int run_aliases(char **argv);
 char *_strtok(char *str, const char *delim);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-
+void execute_multiple_commands(char *line);
+void execute_single_command(char *command);
 /********** Utilities commands ***********/
 
 int _strcmp(char *str1, char *str2);

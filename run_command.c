@@ -6,14 +6,14 @@
  */
 void run_command(char **argv)
 {
+	if (argv[0] == NULL)
+		return;
 	if (run_built_in(argv) == 0)
 		return;
 	else if (run_aliases(argv) == 0)
 		return;
-	else
-	{
-		execute_comand(argv);
-	}
+
+	execute_command(argv);
 }
 
 /**
@@ -25,6 +25,7 @@ void execute_command(char **argv)
 	int status = 0;
 
 	argv[0] = find_path(argv[0]);
+	/*printf("Fullpath: %s\n", argv[0]);*/
 
 	if (argv[0] == NULL)
 	{

@@ -25,16 +25,16 @@ void handle_comment(char *line)
 void execute_multiple_commands(char *line)
 {
 	char *token;
-	char *delimiters = "&&||;";
+	char *delimiters = ";";
 	char *commands[10];
 	int index = 0;
 	int i;
 
-	token = strtok(line, delimiters);
+	token = _strtok(line, delimiters);
 	while (token != NULL)
 	{
 		commands[index++] = token;
-		token = strtok(NULL, delimiters);
+		token = _strtok(NULL, delimiters);
 	}
 
 	i = 0;
@@ -57,12 +57,14 @@ void execute_single_command(char *command)
 	char *arg = NULL;
 
 	int i = 0;
-	
+
 	arg = _strtok(command, " \t\n");
 	while (arg != NULL)
 	{
 		argv[i++] = arg;
+		/*printf("strtoc arg: %s\n", arg);*/
 		arg = _strtok(NULL, " \t\n");
+
 	}
 
 	argv[i] = NULL;
@@ -70,8 +72,9 @@ void execute_single_command(char *command)
 
 	while (argv[i] != NULL)
 	{
-
+		/*printf("Aeguments: %s\n", argv[i]);*/
 		argv[i] = handle_arguments(argv[i]);
+
 		if (argv[i] == NULL && argv[i + 1] != NULL)
 		{
 			argv[i] = argv[i + 1];
@@ -89,22 +92,15 @@ void execute_single_command(char *command)
 int main(void)
 {
 	char *line = NULL;
-	char *argv[32];
-	char *arg = NULL;
 	size_t len = 0;
-	int i;
 	ssize_t read = 0;
 
 	while (1)
 	{
-		do
-		{
-			write(0, "$ ", 2);
-			read = _getline(&line, &len, STDIN_FILENO);
-		}while (strcmp(line, "\n") == 0);
-		
-		printf("out of the loop with: %s%ld\n", line, read);
+		write(0, "$ ", 2);
+		read = getline(&line, &len, stdin);
 
+		/*printf("out of the loop with: %s%ld\n", line, read);*/
 		if (read == -1)
 			break;
 		if (read > 0 && line[read - 1] == '\n')
@@ -113,9 +109,9 @@ int main(void)
 		/* Handle comments*/
 		handle_comment(line);
 
-		i = 0;
-
+		/*** Start the command execution process*/
 		execute_multiple_commands(line);
+
 	}
 	free(line);
 	return (0);

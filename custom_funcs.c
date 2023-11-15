@@ -9,10 +9,8 @@
 char *_strtok(char *str, const char *delim)
 {
 	/* Keeps track of the current position in the string */
-	static char *p;
+	static char *p = NULL;
 	char *token_start;
-
-	p = NULL;
 
 	if (str != NULL)
 		p = str;

@@ -22,17 +22,17 @@ char *find_path(char *filename)
 			return (_strdup(filename));
 		}
 	}
-	else if (path == NULL || filename == NULL)
-	{
-		free(path_copy);
-		return (NULL);
-	}
 	else
 	{
+		if (path == NULL || filename == NULL)
+		{
+			free(path_copy);
+			return (NULL);
+		}
 		while (dir != NULL)
 		{
 			len = _strlen(dir) + _strlen(filename) + 1;
-			if (len > sizeof(fullpath))
+			if (len >= sizeof(fullpath))
 			{
 				free(path_copy);
 				return (NULL);

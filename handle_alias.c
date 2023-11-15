@@ -34,7 +34,6 @@ void create_update_alias(char *alias)
 	char *name = _strtok(alias, "=");
 	char *value = _strtok(NULL, "=");
 	int exists = 0, i, j;
-	/*printf("%s\n", name);*/
 
 	for (j = 0; j < alias_count; j++)
 	{
@@ -44,16 +43,13 @@ void create_update_alias(char *alias)
 			break;
 		}
 	}
-
 	for (i = 0; i < alias_count; i++)
 	{
-		/*printf("looping aliases: %s='%s'\n", aliases[i].name, aliases[i].value);*/
 		if (_strcmp(name, aliases[i].name) == 0)
 		{
 			free(aliases[i].value);
 			aliases[i].value = _strdup(value);
 			exists = 1;
-			/*printf("modified alias: %s='%s'\n", aliases[i].name, aliases[i].value);*/
 			break;
 		}
 	}
