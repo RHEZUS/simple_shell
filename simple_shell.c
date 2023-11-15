@@ -95,13 +95,15 @@ int main(void)
 	int i;
 	ssize_t read = 0;
 
-	(void)argv;
-	(void)arg;
-	(void)i;
 	while (1)
 	{
-		write(0, "$ ", 2);
-		read = getline(&line, &len, stdin);
+		do
+		{
+			write(0, "$ ", 2);
+			read = _getline(&line, &len, STDIN_FILENO);
+		}while (strcmp(line, "\n") == 0);
+		
+		printf("out of the loop with: %s%ld\n", line, read);
 
 		if (read == -1)
 			break;

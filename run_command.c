@@ -6,9 +6,14 @@
  */
 void run_command(char **argv)
 {
-	if (argv[0] == NULL || run_built_in(argv) == 0 || run_aliases(argv) == 0)
+	if (run_built_in(argv) == 0)
 		return;
-	execute_command(argv);
+	else if (run_aliases(argv) == 0)
+		return;
+	else
+	{
+		execute_comand(argv);
+	}
 }
 
 /**
@@ -25,7 +30,6 @@ void execute_command(char **argv)
 	{
 		free(argv[0]);
 		perror("./shell");
-		exit(EXIT_FAILURE);
 	}
 	else
 	{

@@ -8,8 +8,10 @@
 
 char *find_path(char *filename)
 {
-	char *path = _getenv("PATH"), *path_copy = _strdup(path),
-		 *dir = _strtok(path_copy, ":"), fullpath[1024] = "";
+	char *path = _getenv("PATH");
+	char *path_copy = _strdup(path);
+	char *dir = _strtok(path_copy, ":");
+	char fullpath[1024] = "";
 	unsigned int len = 0;
 
 	if (filename[0] == '/' || filename[0] == '.' || filename[0] == '~')
