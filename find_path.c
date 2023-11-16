@@ -6,48 +6,43 @@
  * Return: the full path to the file
  */
 
-char *find_path(char *filename)
+char *find_path(char *command)
 {
-	char *path = _getenv("PATH");
-	char *path_copy = _strdup(path);
-	char *dir = _strtok(path_copy, ":");
-	char fullpath[1024] = "";
-	unsigned int len = 0;
-
-	if (filename[0] == '/' || filename[0] == '.' || filename[0] == '~')
+	char *path, *path_copy, *token, *fullpath;
+	int cmd_len, dir_len;
+	/*struct stat buffer;*/
+	
+	path = getenv("PATH");
+	if (path)
 	{
-		if (access(filename, F_OK) == 0)
+		path_copy = _strdup(path);
+		cmd_len = _strlen(command);
+		token = _strtok(path_copy, ":");
+		while (token != NULL)
 		{
-			free(path_copy);
-			return (_strdup(filename));
-		}
-	}
-	else
-	{
-		if (path == NULL || filename == NULL)
-		{
-			free(path_copy);
-			return (NULL);
-		}
-		while (dir != NULL)
-		{
-			len = _strlen(dir) + _strlen(filename) + 1;
-			if (len >= sizeof(fullpath))
-			{
-				free(path_copy);
-				return (NULL);
-			}
-			_strcpy(fullpath, dir);
+			dir_len = _strlen(token);
+			fullpath = malloc(cmd_len + dir_len + 2);
+			_strcpy(fullpath, token);
 			_strcat(fullpath, "/");
-			_strcat(fullpath, filename);
+			_strcat(fullpath, command);
+			_strcat(fullpath, "\0");
 			if (access(fullpath, F_OK) == 0)
 			{
 				free(path_copy);
-				return (_strdup(fullpath));
+				return (fullpath);
 			}
-			dir = _strtok(NULL, ":");
+			else
+			{
+				free(fullpath);
+				token = _strtok(NULL, ":");
+			}
 		}
 		free(path_copy);
+		if (access(command, F_OK) == 0)
+		{
+			return(command);
+		}
+		return(NULL);
 	}
 	return (NULL);
 }
