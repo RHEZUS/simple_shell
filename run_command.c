@@ -22,7 +22,6 @@ void run_command(char **argv)
  */
 void execute_command(char **argv)
 {
-	int status = 0;
 
 	argv[0] = find_path(argv[0]);
 	/*printf("Fullpath: %s\n", argv[0]);*/
@@ -30,20 +29,11 @@ void execute_command(char **argv)
 	if (argv[0] == NULL)
 	{
 		free(argv[0]);
-		perror("./shell");
+		perror("./shell: ");
 	}
-	else
+	else if (execve(argv[0], argv, environ) == -1)
 	{
-		if (fork() == 0)
-		{
-			execve(argv[0], argv, environ);
-			perror("./shell");
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			wait(&status);
-		}
+		perror("Error:");
 	}
 }
 
